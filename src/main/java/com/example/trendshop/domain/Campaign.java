@@ -26,15 +26,15 @@ public class Campaign implements Discount {
                 .filter(product -> product.getCategory().equals(getCategory()))
                 .collect(Collectors.toList());
 
-        if (collect.size() >= productCount) {
+        if (collect.size() >= getProductCount()) {
             if (DiscountType.AMOUNT == getDiscountType()) {
-                return discountAmount;
+                return getDiscountAmount();
             } else {
                 double totalCostOfCategory = collect
                         .stream()
                         .map(Product::getPrice)
                         .reduce(0d, (p, p2) -> p + p2);
-                return totalCostOfCategory * (discountAmount / 100);
+                return totalCostOfCategory * (getDiscountAmount() / 100);
             }
         }
 
@@ -53,5 +53,13 @@ public class Campaign implements Discount {
 
     public DiscountType getDiscountType() {
         return discountType;
+    }
+
+    public int getProductCount() {
+        return productCount;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
     }
 }
