@@ -20,20 +20,25 @@ public class Campaign implements Discount {
     }
 
     public double getDiscount(ShoppingCart shoppingCart) {
-        Map<Category, List<Product>> collect = shoppingCart.getCartItems()
+        List<Product> collect = shoppingCart.getCartItems()
                 .stream()
                 .map(CartItem::getProduct)
-                .collect(Collectors.groupingBy(Product::getCategory));
+                .filter(product -> product.getCategory().equals(getCategory()))
+                .collect(Collectors.toList());
 
-
-
-
-        for (Category category : collect.keySet()) {
-            List<Product> products = collect.get(category);
-
+        if (collect.size() >= productCount) {
+            if (DiscountType.AMOUNT == getDiscountType()) {
+                return discountAmount;
+            } else {
+                double totalCostOfCategory = collect
+                        .stream()
+                        .map(Product::getPrice)
+                        .reduce(0d, (p, p2) -> p + p2);
+                return totalCostOfCategory * (discountAmount / 100);
+            }
         }
 
-        return 0;
+        return 0d;
     }
 
     @Override
@@ -42,4 +47,11 @@ public class Campaign implements Discount {
         return null;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public DiscountType getDiscountType() {
+        return discountType;
+    }
 }

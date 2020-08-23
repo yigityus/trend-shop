@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ShoppingCart {
     private List<CartItem> cartItems = new ArrayList<>();
+    private double campaignDiscountAmount;
+    private double couponDiscountAmount;
 
     public void addItem(Product product, int quantity) {
         cartItems.add(CartItem.of(product, quantity));
