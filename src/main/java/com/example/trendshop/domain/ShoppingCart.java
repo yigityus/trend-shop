@@ -1,8 +1,10 @@
 package com.example.trendshop.domain;
 
+import com.example.trendshop.TrendShopApplication;
 import com.example.trendshop.calculate.DeliveryCostCalculator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class ShoppingCart {
 
-    Logger log = LoggerFactory.getLogger(ShoppingCart.class);
+    Log log = LogFactory.getLog(ShoppingCart.class);
 
     public static final double costPerDelivery = 1;
     public static final double costPerProduct = 1;
@@ -68,16 +70,17 @@ public class ShoppingCart {
 
                 double totalPrice = quantity * product.getPrice();
 
-                log.info("{} {} {} {} {} {}",
+                log.info(new StringFormattedMessage("%s \t %s \t %s \t %s \t %s \t %s",
                         category.getTitle(),
                         product.getTitle(),
                         quantity,
                         product.getPrice(),
                         totalPrice,
-                        getTotalDiscount());
-
-                log.info("{} {}", getTotalAmountAfterDiscounts(), getDeliveryCost());
+                        getTotalDiscount()));
             }
+
+            log.info(new StringFormattedMessage("%s \t %s",
+                    getTotalAmountAfterDiscounts(), getDeliveryCost()));
 
         }
 

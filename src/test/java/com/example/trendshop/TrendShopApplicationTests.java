@@ -1,15 +1,16 @@
 package com.example.trendshop;
 
 import com.example.trendshop.domain.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TrendShopApplicationTests {
 
-    Logger log = LoggerFactory.getLogger(TrendShopApplicationTests.class);
+    Log log = LogFactory.getLog(TrendShopApplication.class);
+
 
     @Test
     void createCart() {
