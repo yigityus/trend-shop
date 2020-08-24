@@ -29,4 +29,8 @@ public class CartItem {
                 ", quantity=" + quantity +
                 '}';
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

@@ -17,17 +17,17 @@ class TrendShopApplicationTests {
 
     @Test
     void createCart () {
-        ShoppingCart shoppingCart = getCart();
-        log.info(shoppingCart.toString());
-        log.info(String.valueOf(shoppingCart.getTotalCost()));
+        ShoppingCart cart = getCart();
+        log.info(cart.toString());
+        log.info(String.valueOf(cart.getTotalCost()));
     }
 
 
     private ShoppingCart getCart() {
         Category food = new Category("food");
         Product product = new Product("pizza", 10.0, food);
-        ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.addItem(product, 3);
-        return shoppingCart;
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItem(product, 3);
+        return cart;
     }
 }
