@@ -8,5 +8,8 @@ Trendyol's java code assessment project
 2. Discount
     * Campaign
     * Coupon
+    * Discount Type
+        * RATE
+        * AMOUNT
 3. Product
 4. Delivery Cost Calculator  
