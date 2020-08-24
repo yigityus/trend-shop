@@ -58,4 +58,9 @@ public class Campaign implements Discount {
     public double getDiscountAmount() {
         return discountAmount;
     }
+
+    @Override
+    public ShoppingCart apply(ShoppingCart cart) {
+        return cart.applyCampaign(this);
+    }
 }

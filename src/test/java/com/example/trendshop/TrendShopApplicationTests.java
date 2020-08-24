@@ -83,4 +83,21 @@ class TrendShopApplicationTests {
         cart.applyDiscounts(campaign, campaign2);
         assertThat(cart.getCampaignDiscount()).isEqualTo(10.0);
     }
+
+    @Test
+    void functionalCampaign() {
+        Campaign campaign = getCampaign();
+        ShoppingCart cart = getCart();
+        cart = campaign.apply(cart);
+        assertThat(cart.getCampaignDiscount()).isEqualTo(3.0);
+    }
+
+    @Test
+    void functionalCoupon() {
+        Coupon coupon = getCoupon();
+        ShoppingCart cart = getCart();
+        cart = coupon.apply(cart);
+        assertThat(cart.getCouponDiscount()).isEqualTo(4.0);
+    }
+
 }

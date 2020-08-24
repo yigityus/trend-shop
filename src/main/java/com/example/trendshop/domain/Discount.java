@@ -2,6 +2,6 @@ package com.example.trendshop.domain;
 
 import java.util.function.Function;
 
-public interface Discount {
+public interface Discount extends Function<ShoppingCart, ShoppingCart> {
     double getDiscount(ShoppingCart cart);
 }

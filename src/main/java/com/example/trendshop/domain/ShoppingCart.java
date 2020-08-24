@@ -95,7 +95,6 @@ public class ShoppingCart {
         }
 
         return applyCampaign(discount);
-
     }
 
     public ShoppingCart applyCampaign(Discount discount) {

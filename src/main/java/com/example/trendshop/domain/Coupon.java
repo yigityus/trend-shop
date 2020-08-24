@@ -37,4 +37,9 @@ public class Coupon implements Discount {
     public DiscountType getDiscountType() {
         return discountType;
     }
+
+    @Override
+    public ShoppingCart apply(ShoppingCart cart) {
+        return cart.applyCoupon(this);
+    }
 }
