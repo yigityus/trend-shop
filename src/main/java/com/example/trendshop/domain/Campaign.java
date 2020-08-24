@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class Campaign implements Discount {
 
+    // Campaigns are applicable to a product category
+
     private Category category;
     private int minProductCount;
     private DiscountType discountType;
@@ -30,12 +32,12 @@ public class Campaign implements Discount {
                 return getDiscountAmount();
             } else {
 
-
                 double totalCostOfCategory = shoppingCart.getCartItems()
                         .stream()
                         .filter(cartItem -> cartItem.getProduct().getCategory().equals(getCategory()))
                         .map(cartItem -> cartItem.getQuantity() * cartItem.getProduct().getPrice())
                         .reduce((c, c2) -> c + c2).get();
+
                 return totalCostOfCategory * (getDiscountAmount() / 100);
             }
         }
@@ -62,5 +64,15 @@ public class Campaign implements Discount {
     @Override
     public ShoppingCart apply(ShoppingCart cart) {
         return cart.applyCampaign(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Campaign{" +
+                "category=" + category +
+                ", minProductCount=" + minProductCount +
+                ", discountType=" + discountType +
+                ", discountAmount=" + discountAmount +
+                '}';
     }
 }

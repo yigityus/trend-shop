@@ -1,7 +1,6 @@
 package com.example.trendshop.domain;
 
-import com.example.trendshop.TrendShopApplication;
-import com.example.trendshop.calculate.DeliveryCostCalculator;
+import com.example.trendshop.calculate.DeliveryCostCalculatorImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.logging.log4j.message.StringFormattedMessage;
@@ -11,21 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ShoppingCart {
+public class ShoppingCart implements Cart {
 
     Log log = LogFactory.getLog(ShoppingCart.class);
 
-    public static final double costPerDelivery = 1;
-    public static final double costPerProduct = 1;
-    public static final double fixedCost = 2.99;
-
-    DeliveryCostCalculator deliveryCostCalculator =
-            new DeliveryCostCalculator(costPerDelivery, costPerProduct, fixedCost);
+    DeliveryCostCalculatorImpl deliveryCostCalculatorImpl =
+            new DeliveryCostCalculatorImpl(costPerDelivery, costPerProduct, fixedCost);
 
     private List<CartItem> cartItems = new ArrayList<>();
     private double campaignDiscount;
     private double couponDiscount;
 
+    @Override
     public void addItem(Product product, int quantity) {
         cartItems.add(CartItem.of(product, quantity));
     }
@@ -45,10 +41,12 @@ public class ShoppingCart {
         return getTotalCost() - getTotalDiscount();
     }
 
+    @Override
     public double getDeliveryCost() {
-        return deliveryCostCalculator.calculateFor(this);
+        return deliveryCostCalculatorImpl.calculateFor(this);
     }
 
+    @Override
     public void print() {
         Map<Category, List<Product>> cartItemsMap = getCartItems()
                 .stream()
@@ -100,11 +98,13 @@ public class ShoppingCart {
         return applyCampaign(discount);
     }
 
+    @Override
     public ShoppingCart applyCampaign(Discount discount) {
         setCampaignDiscount(discount.getDiscount(this));
         return this;
     }
 
+    @Override
     public ShoppingCart applyCoupon(Discount discount) {
         setCouponDiscount(discount.getDiscount(this));
         return this;
@@ -132,8 +132,11 @@ public class ShoppingCart {
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "cartItems=" + cartItems +
+        return "ShoppingCart{" +
+                "deliveryCostCalculator=" + deliveryCostCalculatorImpl +
+                ", cartItems=" + cartItems +
+                ", campaignDiscount=" + campaignDiscount +
+                ", couponDiscount=" + couponDiscount +
                 '}';
     }
 }

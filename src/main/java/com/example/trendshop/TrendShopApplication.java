@@ -22,24 +22,21 @@ public class TrendShopApplication {
     @Bean
     ApplicationRunner runner() {
         return args -> {
+            ShoppingCart cart = new ShoppingCart();
 
             Category car = new Category("cars");
             Category mazda = new Category("mazda", Optional.of(car));
 
             Product cx3 = new Product("mazda cx-3", 1000, mazda);
-            ShoppingCart cart = new ShoppingCart();
             cart.addItem(cx3, 2);
 
             Product cx5 = new Product("mazda cx-5", 4000, mazda);
             cart.addItem(cx5, 1);
 
-
             Campaign campaign = new Campaign(mazda, 2, DiscountType.RATE, 10);
             campaign.apply(cart);
 
             cart.print();
-
-
         };
     }
 }

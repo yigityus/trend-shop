@@ -12,15 +12,6 @@ public class Product {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "title='" + title + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                '}';
-    }
-
     public double getPrice() {
         return price;
     }
@@ -48,5 +39,14 @@ public class Product {
     @Override
     public int hashCode() {
         return title != null ? title.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "title='" + title + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                '}';
     }
 }

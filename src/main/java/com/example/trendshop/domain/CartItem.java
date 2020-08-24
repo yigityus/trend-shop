@@ -22,15 +22,15 @@ public class CartItem {
         return product;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     @Override
     public String toString() {
         return "CartItem{" +
                 "product=" + product +
                 ", quantity=" + quantity +
                 '}';
-    }
-
-    public int getQuantity() {
-        return quantity;
     }
 }

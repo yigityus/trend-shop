@@ -2,6 +2,8 @@ package com.example.trendshop.domain;
 
 public class Coupon implements Discount {
 
+    // Coupons exist for cart discounts
+
     private double minAmount;
     private double discountAmount;
     private DiscountType discountType;
@@ -13,7 +15,6 @@ public class Coupon implements Discount {
     }
 
     public double getDiscount(ShoppingCart shoppingCart) {
-
         if (getMinAmount() < shoppingCart.getTotalCost()) {
             switch (getDiscountType()) {
                 case RATE:
@@ -41,5 +42,14 @@ public class Coupon implements Discount {
     @Override
     public ShoppingCart apply(ShoppingCart cart) {
         return cart.applyCoupon(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Coupon{" +
+                "minAmount=" + minAmount +
+                ", discountAmount=" + discountAmount +
+                ", discountType=" + discountType +
+                '}';
     }
 }
