@@ -21,12 +21,12 @@ public class DeliveryCostCalculator {
     }
 
     public double calculateFor(ShoppingCart cart) {
-        Map<Category, List<Product>> collect = cart.getCartItems()
+        Map<Category, List<Product>> cartItemsMap = cart.getCartItems()
                 .stream()
                 .map(CartItem::getProduct)
                 .collect(Collectors.groupingBy(Product::getCategory));
 
-        int numberOfDeliveries = collect.keySet().size();
+        int numberOfDeliveries = cartItemsMap.keySet().size();
 
         int numberOfProducts = cart.getCartItems()
                 .stream()

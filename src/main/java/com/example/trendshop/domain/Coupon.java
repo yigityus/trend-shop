@@ -19,15 +19,11 @@ public class Coupon implements Discount {
                 case RATE:
                     return shoppingCart.getTotalCost() * (getDiscountAmount() / 100);
                 case AMOUNT:
-                    return shoppingCart.getTotalCost() - getDiscountAmount();
+                    return getDiscountAmount();
             }
         }
 
         return 0d;
-    }
-    @Override
-    public ShoppingCart apply(ShoppingCart shoppingCart) {
-        return null;
     }
 
     public double getMinAmount() {
